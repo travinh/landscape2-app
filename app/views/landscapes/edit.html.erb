@@ -1,0 +1,12 @@
+<h1>Change Landscape Info</h1>
+
+<%= form_with model:@landscape, id: :new_landscape do |form| %>
+    <%= form.label :address %>
+    <%= form.text_field :address %><br>
+    <%= form.label "Area" %>
+    <%= form.text_field :area %><br>
+    <%= form.label "Team_id" %>
+    <%= form.text_field :team_id %><br>
+    <%= form.submit "Submit" %>
+
+<%end %>

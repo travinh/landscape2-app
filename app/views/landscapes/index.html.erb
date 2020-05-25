@@ -1,0 +1,7 @@
+
+<h1>All the landscapes - Index page</h1>
+<ul>
+    <% @landscapes.each do |s| %>
+    <li> <%= link_to(s.address, "/landscapes/#{s.id}") %></li>
+    <% end %>
+</ul>

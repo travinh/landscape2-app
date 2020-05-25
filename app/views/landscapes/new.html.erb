@@ -1,0 +1,18 @@
+<h1>New Landscape</h1>
+
+<% if @landscape.errors.any? %>
+    <h5 style="color: red"><%= @landscape.errors.full_messages.to_sentence %></h5>
+<% end %>
+<br>
+<%# form tag need a url or url_path_helper where it posts to %>
+<%# if we use form_for then using Landscape.new and create a |form| instance in do-end loop, then use form.text_field %>
+<%= form_with model:@landscape, local: :true do |form| %>
+    <%= form.label "Address" %>
+    <%= form.text_field :address, class: @landscape.errors.any? ? "error-field" : nil %><br>
+    <%= form.label "Area" %>
+    <%= form.text_field :area %><br>
+    <%= form.label "Team_id" %>
+    <%= form.text_field :team_id %><br>
+    <%= form.submit "Submit" %>
+
+<%end %>

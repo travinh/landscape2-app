@@ -1,0 +1,10 @@
+<h1>Show details of landscape</h1>
+<ul>
+    <h4>ID: <%= @landscape.id %></h4>
+    <h4>Address: <%= @landscape.address %></h4>
+    <h4>Area(square feet): <%= @landscape.area %></h4>
+    <h4>Team: <%= @landscape.id %></h4>
+
+</ul>
+<h6><%= link_to("Edit", edit_landscape_path(@landscape)) %></h6>
+<h6><%= link_to("Delete", @landscape, method: :delete, data:{confirm: "Are you sure?"}) %></h6>
