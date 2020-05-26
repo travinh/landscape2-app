@@ -14,7 +14,7 @@ class LandscapesController < ApplicationController
 
     def show 
         @landscape = Landscape.find_by_id(params[:id])
-        
+       
         if params[:team_id]
             set_team
         end 

@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   #  delete '/teams/:id', to: "teams#destroy"
 
   #log_in
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :edit, :update, :destroy, :show]
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'welcome', to: 'sessions#welcome'
@@ -65,7 +65,7 @@ Rails.application.routes.draw do
   resources :teams do 
     resources :landscapes, only: [:index, :show, :new, :create]
   end
-  
+
   
   resources :landscapes
 

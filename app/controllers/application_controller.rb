@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     helper_method :logged_in?
 
     def welcome 
-        render "/welcome"
+        render "/sessions/welcome"
     end
 
     def wrong_page

@@ -6,5 +6,21 @@
   <%= f.text_field :name%><br>
   <%= f.label :password%><br>
   <%= f.password_field :password%><br>
+  <h4>Landscape</h4>
+    <%= f.fields_for :landscapes do |land| %>
+        <%= land.label :address %>
+        <%= land.text_field :address %>
+        <%= land.label "Area (square feet)" %>
+        <%= land.number_field :area %>
+        <%= land.label :team_id %>
+        <%= land.number_field :team_id %> <br>
+    <% end %>
   <%= f.submit %>
 <%end%>
+
+    
+
+
+
+    
+

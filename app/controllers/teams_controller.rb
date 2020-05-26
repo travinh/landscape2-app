@@ -25,6 +25,7 @@ class TeamsController < ApplicationController
 
     def create
         @team = Team.new(team_params)
+    
         if @team.save
             redirect_to @team
         else
@@ -58,6 +59,9 @@ class TeamsController < ApplicationController
 
     def destroy
         @team = Team.find_by(id:params[:id])
+        @team.landscapes.each do |l|
+            l.team_id = nil
+        end
         @team.destroy
         redirect_to teams_path
     end

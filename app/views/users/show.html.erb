@@ -1,0 +1,20 @@
+<h1>User Profile </h1>
+<ul>
+    <h5>ID: <%= @user.id %></h4>
+    <h5>Name: <%= @user.name %></h4>
+    <h5>Email: <%= @user.email %></h4>
+
+    <h4>Landscapes:</h4>
+    <ul>
+        <% @user.landscapes.each do |l| %>
+            <li><%= link_to l.address, landscape_path(l) %>- Team: <%= link_to l.team_id, team_path(l.team_id) %></li>
+            
+        <% end %>
+    </ul>
+  
+   
+
+
+</ul>
+<h6><%= link_to("Edit", edit_user_path(@user)) %></h6>
+<h6><%= link_to("Delete", @user, method: :delete, data:{confirm: "Are you sure?"}) %></h6>

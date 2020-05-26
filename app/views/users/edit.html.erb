@@ -1,0 +1,25 @@
+<h1>Change User Info</h1>
+
+<%= form_with model:@user do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name %><br>
+    <%= form.label :password %>
+    <%= form.password_field :password %><br>
+    <h4>Landscape</h4>
+    <%# <%= form.fields_for :landscapes do |land| %>
+
+    <%= form.fields_for :landscapes do |l| %>
+        <%= l.label "Address"%>
+        <%= l.text_field :address, value:l.address %>
+        <%= l.label "Area (square feet)" %>
+        <%= l.number_field :area, value:l.area %>
+        <%= l.label "Team" %>
+        <%= l.number_field :team_id, value:l.team_id %> <br>
+    <% end %>
+   
+ 
+  
+    <%= form.submit "Submit" %>
+
+<%end %>
+
