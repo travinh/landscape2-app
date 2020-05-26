@@ -1,0 +1,10 @@
+<h1>Show details of team</h1>
+<ul>
+    <h4>ID: <%= @team.id %></h4>
+    <h4>Name: <%= @team.name %></h4>
+   
+
+
+</ul>
+<h6><%= link_to("Edit", edit_teams_path(@team)) %></h6>
+<h6><%= link_to("Delete", @team, method: :delete, data:{confirm: "Are you sure?"}) %></h6>

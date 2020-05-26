@@ -1,0 +1,15 @@
+<h1>New Team</h1>
+
+<% if @team.errors.any? %>
+    <h5 style="color: red"><%= @team.errors.full_messages.to_sentence %></h5>
+<% end %>
+<br>
+<%# form tag need a url or url_path_helper where it posts to %>
+<%# if we use form_for then using Landscape.new and create a |form| instance in do-end loop, then use form.text_field %>
+<%= form_with model:@team, local: :true do |form| %>
+    <%= form.label "Name" %>
+    <%= form.text_field :name, class: @team.errors.any? ? "error-field" : nil %><br>
+    
+    <%= form.submit "Submit" %>
+
+<%end %>
