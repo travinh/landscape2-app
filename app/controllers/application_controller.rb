@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
+    before_action :authorized
+    helper_method :current_user
+    helper_method :logged_in?
 
     def welcome 
         render "/welcome"
@@ -12,21 +15,16 @@ class ApplicationController < ActionController::Base
   
     
   
-      helpers do
-    
-        def logged_in?
-          !!session[:user_id]
-        end
-    
-        def current_user
-          @user ||= User.find_by_id(session[:user_id]) if logged_in?
-        end
-    
-        def redirect_if_not_loggedin
-          if !logged_in?
-              redirect_to log_in_path
-          end
-        end
-    
+    def current_user    
+        User.find_by(id: session[:user_id])  
     end
+
+    def logged_in?
+       
+        !current_user.nil?  
+    end
+
+    def authorized
+        redirect_to '/welcome' unless logged_in?
+     end
 end

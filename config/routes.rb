@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'users/new'
+  get 'users/create'
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/login'
+  get 'sessions/welcome'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # get '/users', to: "users#index"
@@ -46,14 +52,20 @@ Rails.application.routes.draw do
   #  delete '/teams/:id', to: "teams#destroy"
 
   #log_in
-  get '/log_in', to: "users#log_in"
-  post '/user', to: "users#show"
+  resources :users, only: [:new, :create]
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  get 'welcome', to: 'sessions#welcome'
+  get 'authorized', to: 'sessions#page_requires_login'
+  delete 'logout' => 'sessions#destroy'
+
+  resources :sessions
 
 
   resources :teams do 
     resources :landscapes, only: [:index, :show, :new, :create]
   end
-
+  
   
   resources :landscapes
 

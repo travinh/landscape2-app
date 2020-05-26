@@ -1,30 +1,26 @@
 class UsersController < ApplicationController
-    skip_before_action :verify_authenticity_token
+    skip_before_action :authorized, only: [:new, :create]
+  def new
+    @user = User.new
+  end
 
-    def log_in
-       
+ 
+  def create
+    @user = User.create(user_params)
+   
+    if @user.save
+        session[:user_id] = @user.id
+        redirect_to '/welcome'
+    else
+        redirect_to '/login'
     end
-
-    def show 
-        
-        @user = User.find_by(email:params[:email])
-        byebug
-        if @user && @user.authenticate(params[:user_params])
-            session[:user_id] = user.id 
-            redirect "/schedules"
-            
-        else
-            redirect "/login"
-        end
-        
-    end
-
-
+ end
 
     private
 
+
     def user_params
-        params.require(:user).permit(:name, :id, :email, :password , :team_id, landscapes_attributes:[:id, :address, :area, :user_id])
+        params.require(:user).permit(:name, :email,:password, :id, :team_id, landscapes_attributes:[:id, :address, :area, :user_id])
     end
 
 end
