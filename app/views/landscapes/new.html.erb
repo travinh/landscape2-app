@@ -6,7 +6,7 @@
 <br>
 <%# form tag need a url or url_path_helper where it posts to %>
 <%# if we use form_for then using Landscape.new and create a |form| instance in do-end loop, then use form.text_field %>
-<%= form_with model:@landscape, local: :true do |form| %>
+<%= form_with model: [@team, @landscape], local: :true do |form| %>
     <%= form.label "Address" %>
     <%= form.text_field :address, class: @landscape.errors.any? ? "error-field" : nil %><br>
     <%= form.label "Area" %>

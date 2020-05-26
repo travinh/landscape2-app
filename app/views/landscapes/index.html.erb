@@ -1,7 +1,18 @@
-
-<h1>All the landscapes - Index page</h1>
+<% if @team %>
+<h2><%= @team.name %> Team's Landscapes</h2>
+<% else %>
+<h2>All Landscapes:</h2>
+<% end %>
 <ul>
-    <% @landscapes.each do |s| %>
-    <li> <%= link_to(s.address, "/landscapes/#{s.id}") %></li>
+
+<% if @team %>
+    <% @landscapes.each do |land|  %>
+        <li> <%= link_to land.address, team_landscape_path(@team, land) %></li>
     <% end %>
-</ul>
+<% else %>
+    <% @landscapes.each do |land|  %>
+        <li> <%=land.address %></li>
+    <% end %>
+<% end %>
+<ul>
+

@@ -1,28 +1,44 @@
 class LandscapesController < ApplicationController
 
+    
     def index 
-       
-        @landscapes = Landscape.all
+        if params[:team_id]
+            set_team
+            @landscapes = @team.landscapes
+        else
+            @landscapes = Landscape.all
+        end
     end
 
+
+
     def show 
-        @landscape = Landscape.find_by(id:params[:id])
+        @landscape = Landscape.find_by_id(params[:id])
         
-        if @landscape
-            render "show"
-        else
-            redirect_to landscapes_path
-        end
-       
+        if params[:team_id]
+            set_team
+        end 
     end
 
     def new 
-        @landscape = Landscape.new
+        if params[:team_id]
+            set_team
+            @landscape = @team.landscapes.build
+        else
+            @landscape = Landscape.new
+        end
+        
     end
 
     def create
 
-        @landscape = Landscape.new(landscape_params)
+        if params[:team_id]
+            set_team
+            @landscape = @team.landscapes.build(landscape_params)
+        else
+            @landscape = Landscape.new(landscape_params)
+        end
+
         if @landscape.save
             redirect_to @landscape
         else
@@ -62,8 +78,11 @@ class LandscapesController < ApplicationController
 
     private
 
+    def set_team
+        @team = Team.find_by_id(params[:team_id])
+    end
 
     def landscape_params
-        params.require(:landscape).permit(:address, :id, :team_id, :user_id, :area)
+        params.require(:landscape).permit(:address, :id, :team_id, :user_id, :area, :team_id)
     end
 end
