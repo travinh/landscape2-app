@@ -1,6 +1,7 @@
 class LandscapesController < ApplicationController
 
     def index 
+       
         @landscapes = Landscape.all
     end
 
@@ -20,6 +21,7 @@ class LandscapesController < ApplicationController
     end
 
     def create
+
         @landscape = Landscape.new(landscape_params)
         if @landscape.save
             redirect_to @landscape
@@ -62,6 +64,6 @@ class LandscapesController < ApplicationController
 
 
     def landscape_params
-        params.require(:landscape).permit(:address, :id, :team_id, :area)
+        params.require(:landscape).permit(:address, :id, :team_id, :user_id, :area)
     end
 end
