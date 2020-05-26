@@ -45,9 +45,16 @@ Rails.application.routes.draw do
   #  #destroy
   #  delete '/teams/:id', to: "teams#destroy"
 
+  #log_in
+  get '/log_in', to: "users#log_in"
+  post '/user', to: "users#show"
+
+
   resources :teams do 
     resources :landscapes, only: [:index, :show, :new, :create]
   end
+
+  
   resources :landscapes
 
 
