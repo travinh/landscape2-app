@@ -3,11 +3,12 @@ class TeamsController < ApplicationController
     def index 
        
         @teams = Team.all
+
     end
 
     def show 
         @team = Team.find_by(id:params[:id])
-    
+  
         if @team
             render "show"
         else
@@ -18,10 +19,11 @@ class TeamsController < ApplicationController
 
     def new 
         @team = Team.new
+        3.times { @team.landscapes.build }
+        
     end
 
     def create
-
         @team = Team.new(team_params)
         if @team.save
             redirect_to @team
@@ -64,6 +66,6 @@ class TeamsController < ApplicationController
 
 
     def team_params
-        params.require(:team).permit(:name, :id, :landscape_id, :user_id)
+        params.require(:team).permit(:name, :id, :landscape_id, :user_id, landscapes_attributes:[:id, :address, :area, :user_id])
     end
 end

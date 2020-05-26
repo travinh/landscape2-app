@@ -9,7 +9,17 @@
 <%= form_with model:@team, local: :true do |form| %>
     <%= form.label "Name" %>
     <%= form.text_field :name, class: @team.errors.any? ? "error-field" : nil %><br>
+    <h4>Landscape</h4>
+    <%= form.fields_for :landscapes do |land| %>
+        <%= land.label :address %>
+        <%= land.text_field :address %>
+        <%= land.label "Area (square feet)" %>
+        <%= land.number_field :area %>
+        <%= land.label :user_id %>
+        <%= land.number_field :user_id %> <br>
+    <% end %>
     
     <%= form.submit "Submit" %>
+    
 
 <%end %>
