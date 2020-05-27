@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    
     @user = User.find_by(email: params[:email])
 
     if @user && @user.authenticate(params[:password])
@@ -13,6 +14,13 @@ class SessionsController < ApplicationController
     else
         redirect_to '/login'
     end
+  end
+
+  def create_github
+    
+    @user = User.find_or_create_from_auth_hash(auth_hash)
+    self.current_user = @user
+    redirect_to '/'
   end
 
   def login
@@ -29,4 +37,10 @@ class SessionsController < ApplicationController
     session[:user_id] = nil           
     redirect_to '/welcome' 
   end 
+
+  protected
+
+  def auth_hash
+    request.env['omniauth.auth']
+  end
 end

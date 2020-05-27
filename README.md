@@ -27,6 +27,7 @@ DONE
 DONE
 
 8. Your forms should correctly display validation errors.
+DONE
 
 a. Your fields should be enclosed within a fields_with_errors class
 

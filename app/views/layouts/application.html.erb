@@ -14,7 +14,9 @@
       <h6><%= link_to("All Landscapes",landscapes_path) %></h6>
       <h6><%= link_to("Search Landscapes",search_landscapes_path) %></h6>
     <% else %>
+
       <%= button_to "Login", '/login', method: :get %>
+      <%= button_to "Login with Github", github_auth_path, method: :get %>
       <%= button_to "Sign Up", '/users/new', method: :get %>
     <% end %>
 

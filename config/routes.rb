@@ -59,6 +59,11 @@ Rails.application.routes.draw do
   get 'authorized', to: 'sessions#page_requires_login'
   delete 'logout' => 'sessions#destroy'
 
+  root to: "application#welcome"
+
+  get 'auth/github', as: 'github_auth'
+
+  get "/auth/:provider/callback" => "sessions#create_github"
   resources :sessions
 
 
