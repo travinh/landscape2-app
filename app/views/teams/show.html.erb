@@ -5,12 +5,22 @@
     <h4>Landscapes:</h4>
     <ul>
         <% @team.landscapes.each do |l| %>
-            <li><%= l.address %></li>
+            <li>
+            <%= link_to l.address, landscape_path(l) %> - User: 
+            <% if l.user_id  %>
+                <%= link_to l.user_id, user_path(l.user_id) %>
+            <% else %>
+                Team is not assigned
+            <% end %>
+            </li>
+            
+             
         <% end %>
     </ul>
    
 
 
 </ul>
+
 <h6><%= link_to("Edit", edit_team_path(@team)) %></h6>
 <h6><%= link_to("Delete", @team, method: :delete, data:{confirm: "Are you sure?"}) %></h6>

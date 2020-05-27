@@ -19,30 +19,41 @@ class UsersController < ApplicationController
  end
 
  def show 
-    @user = User.find_by(id:params[:id])
-    
-    if @user
-        render "show"
+    if check_user_using_userID
+        @user = User.find_by(id:params[:id])
+        
+        if @user
+            render "show"
+        else
+            redirect_to user_path(current_user.id)
+        end
     else
-        redirect_to users_path
+        redirect_to user_path(current_user.id)
     end
    
 end
 
  def edit
-   
-    @user = User.find_by(id:params[:id])
-    if @user
-        render 'edit'
+    if check_user_using_userID
+        @user = User.find_by(id:params[:id])
+        
+        if @user
+            render 'edit'
+        else
+            redirect_to user_path(current_user.id)
+        end
     else
-        redirect_to users_path
+        redirect_to user_path(current_user.id)
     end
+   
+
 end
 
 def update
 
     
     @user =  User.find_by(id:params[:id])
+
     if @user
         @user.update(user_params)
         if @user.errors.any?
@@ -57,15 +68,20 @@ def update
 end
 
 def destroy
-    @user = User.find_by(id:params[:id])
-    @user.landscapes.each do |l|
-        l.user_id = nil
+    if check_user_using_userID
+        @user = User.find_by(id:params[:id])
+        @user.landscapes.each do |l|
+            l.user_id = nil
+        end
+        @user.destroy
+        redirect_to users_path
+    else
+        redirect_to user_path(current_user.id)
     end
-    @user.destroy
-    redirect_to users_path
 end
 
     private
+
 
 
     def user_params

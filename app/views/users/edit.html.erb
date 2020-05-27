@@ -10,13 +10,15 @@
 
     <%= form.fields_for :landscapes do |l| %>
         <%= l.label "Address"%>
-        <%= l.text_field :address, value:l.address %>
+        <%= l.text_field :address %>
         <%= l.label "Area (square feet)" %>
-        <%= l.number_field :area, value:l.area %>
+        <%= l.number_field :area%>
         <%= l.label "Team" %>
-        <%= l.number_field :team_id, value:l.team_id %> <br>
+        <%= l.number_field :team_id %> <br>
     <% end %>
-   
+
+
+
  
   
     <%= form.submit "Submit" %>

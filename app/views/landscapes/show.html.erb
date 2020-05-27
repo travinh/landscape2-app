@@ -1,5 +1,7 @@
-<% if @sushi %>
-<h2><%= @sushi.name %> Team's Landscape:</h2>
+<% if @team %>
+<h2><%= @team.name %> Team's Landscape:</h2>
+<% else %>
+    <h2>Landscape Info</h2>
 <% end %>
 
 
@@ -11,3 +13,16 @@
 <% if @landscape.team_id  %>
     <h4 class="red-text"> Team_id: <%= @landscape.team_id %></h4>
 <% end %>
+
+
+<% if check_user_using_landscapeID %>
+    <h6><%= link_to("Edit", edit_landscape_path(@landscape)) %></h6>
+
+    <h6><%= link_to("Delete", @landscape, method: :delete, data:{confirm: "Are you sure?"}) %></h6>
+<% end %>
+
+
+
+
+
+

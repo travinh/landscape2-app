@@ -31,7 +31,7 @@ class LandscapesController < ApplicationController
     end
 
     def create
-
+           
         if params[:team_id]
             set_team
             @landscape = @team.landscapes.build(landscape_params)
@@ -47,10 +47,17 @@ class LandscapesController < ApplicationController
     end
 
     def edit
-        @landscape = Landscape.find_by(id:params[:id])
-        if @landscape
-            render 'edit'
+        
+        if check_user_using_landscapeID
+            
+            @landscape = Landscape.find_by(id:params[:id])
+            if @landscape
+                render 'edit'
+            else
+                redirect_to landscapes_path
+            end
         else
+        
             redirect_to landscapes_path
         end
     end
@@ -71,12 +78,18 @@ class LandscapesController < ApplicationController
     end
 
     def destroy
-        @landscape = Landscape.find_by(id:params[:id])
-        @landscape.destroy
-        redirect_to landscapes_path
+        if check_user_using_landscapeID
+            @landscape = Landscape.find_by(id:params[:id])
+            @landscape.destroy
+            redirect_to landscapes_path
+        else
+            redirect_to landscapes_path
+        end
     end
 
     private
+
+
 
     def set_team
         @team = Team.find_by_id(params[:team_id])

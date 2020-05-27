@@ -7,10 +7,14 @@ class TeamsController < ApplicationController
     end
 
     def show 
-        @team = Team.find_by(id:params[:id])
-  
-        if @team
-            render "show"
+        if check_user_using_teamID
+            @team = Team.find_by(id:params[:id])
+    
+            if @team
+                render "show"
+            else
+                redirect_to teams_path
+            end
         else
             redirect_to teams_path
         end
@@ -34,9 +38,13 @@ class TeamsController < ApplicationController
     end
 
     def edit
-        @team = Team.find_by(id:params[:id])
-        if @team
-            render 'edit'
+        if check_user_using_teamID
+            @team = Team.find_by(id:params[:id])
+            if @team
+                render 'edit'
+            else
+                redirect_to teams_path
+            end
         else
             redirect_to teams_path
         end
@@ -58,12 +66,16 @@ class TeamsController < ApplicationController
     end
 
     def destroy
-        @team = Team.find_by(id:params[:id])
-        @team.landscapes.each do |l|
-            l.team_id = nil
+        if check_user_using_teamID
+            @team = Team.find_by(id:params[:id])
+            @team.landscapes.each do |l|
+                l.team_id = nil
+            end
+            @team.destroy
+            redirect_to teams_path
+        else
+            redirect_to teams_path
         end
-        @team.destroy
-        redirect_to teams_path
     end
 
     private

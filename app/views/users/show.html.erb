@@ -7,12 +7,17 @@
     <h4>Landscapes:</h4>
     <ul>
         <% @user.landscapes.each do |l| %>
-            <li><%= link_to l.address, landscape_path(l) %>- Team: <%= link_to l.team_id, team_path(l.team_id) %></li>
-            
+            <li>
+            <%= link_to l.address, landscape_path(l) %> - Team: 
+            <% if l.team_id  %>
+                <%= link_to l.team_id, team_path(l.team_id) %>
+            <% else %>
+                Does not have any workers in this team!
+            <% end %>
+            </li>
         <% end %>
     </ul>
-  
-   
+    
 
 
 </ul>
