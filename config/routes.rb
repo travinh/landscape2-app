@@ -66,6 +66,8 @@ Rails.application.routes.draw do
     resources :landscapes, only: [:index, :show, :new, :create]
   end
 
+  get '/landscapes/search', to:"landscapes#search",  as: "search_landscapes"
+  get '/search', to:"landscapes#resolved"
   
   resources :landscapes
 

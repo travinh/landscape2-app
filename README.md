@@ -12,6 +12,7 @@ DONE
 DONE
 
 4. You must include at least one class level ActiveRecord scope method. a. Your scope method must be chainable, meaning that you must use ActiveRecord Query methods within it (such as .where and .order) rather than native ruby methods (such as #find_all or #sort).
+DONE
 
 5. Your application must provide standard user authentication, including signup, login, logout, and passwords.
 DONE

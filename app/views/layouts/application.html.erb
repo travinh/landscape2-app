@@ -12,6 +12,7 @@
       <%= button_to "Log out", logout_path, method: :delete %>
       <%= button_to "Home", user_path(current_user.id), method: :get %>
       <h6><%= link_to("All Landscapes",landscapes_path) %></h6>
+      <h6><%= link_to("Search Landscapes",search_landscapes_path) %></h6>
     <% else %>
       <%= button_to "Login", '/login', method: :get %>
       <%= button_to "Sign Up", '/users/new', method: :get %>

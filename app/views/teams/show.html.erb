@@ -21,6 +21,8 @@
 
 
 </ul>
+<% if check_user_using_landscapeID %>
+   <h6><%= link_to("Edit", edit_team_path(@team)) %></h6>
+    <h6><%= link_to("Delete", @team, method: :delete, data:{confirm: "Are you sure?"}) %></h6>
+<% end %>
 
-<h6><%= link_to("Edit", edit_team_path(@team)) %></h6>
-<h6><%= link_to("Delete", @team, method: :delete, data:{confirm: "Are you sure?"}) %></h6>

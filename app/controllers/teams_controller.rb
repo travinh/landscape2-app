@@ -7,17 +7,15 @@ class TeamsController < ApplicationController
     end
 
     def show 
-        if check_user_using_teamID
-            @team = Team.find_by(id:params[:id])
-    
-            if @team
-                render "show"
-            else
-                redirect_to teams_path
-            end
+        
+        @team = Team.find_by(id:params[:id])
+
+        if @team
+            render "show"
         else
             redirect_to teams_path
         end
+  
        
     end
 

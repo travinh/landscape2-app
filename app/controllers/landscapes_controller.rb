@@ -87,15 +87,35 @@ class LandscapesController < ApplicationController
         end
     end
 
+    def search
+    end
+
+    # Search for what matches the Query
+    # recive query & display matches
+    # get
+    def resolved
+    
+        # @landscapes = Landscape.all.find_all
+        @landscapes = Landscape.all.find_all{|s| s.address.downcase.include?(params[:query].downcase)}
+        # @landscapes.each do |s|
+           
+        #     if s.address.downcase.include?(params[:query].downcase)
+        #         @landscape << s.address.downcase.include?(params[:query].downcase)
+        #     end
+        # end
+    end
+
+
+
+
+
     private
-
-
 
     def set_team
         @team = Team.find_by_id(params[:team_id])
     end
 
     def landscape_params
-        params.require(:landscape).permit(:address, :id, :team_id, :user_id, :area, :team_id)
+        params.require(:landscape).permit(:address, :id, :team_id, :query,:user_id, :area, :team_id)
     end
 end
