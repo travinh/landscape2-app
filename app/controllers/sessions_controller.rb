@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authorized, only: [:new, :create, :welcome]
+  skip_before_action :authorized, only: [:new, :create, :welcome, :create_github]
   def new
   end
 
@@ -16,21 +16,35 @@ class SessionsController < ApplicationController
     end
   end
 
-  def create_github
-    
-    @user = User.find_or_create_from_auth_hash(auth_hash)
-    self.current_user = @user
-    redirect_to '/'
+  def create_github 
+
+    @user = User.find_or_create_by_auth(request.env['omniauth.auth'])
+    if @user
+      byebug
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
+    else
+      redirect_to '/welcome'
+    end
+  #   byebug
+  #   @user = User.find_or_create_from_auth_hash(auth_hash)
+   
+  #   self.current_user = @user
+  #   redirect_to user_path(@user)
   end
 
   def login
+
   end
 
   def welcome
+    
     @user = current_user
+
   end
 
   def page_requires_login
+    
   end
 
   def destroy     

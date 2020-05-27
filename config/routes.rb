@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
+  
+
+  get "/auth/:provider/callback", to: "sessions#create_github"
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  get 'welcome', to: 'sessions#welcome'
+  get 'authorized', to: 'sessions#page_requires_login'
+  delete 'logout' => 'sessions#destroy'
+
+
   get 'users/new'
   get 'users/create'
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/login'
   get 'sessions/welcome'
+  get 'auth/github', as: 'github_auth'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # get '/users', to: "users#index"
@@ -53,17 +64,12 @@ Rails.application.routes.draw do
 
   #log_in
   resources :users, only: [:new, :create, :edit, :update, :destroy, :show]
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-  get 'welcome', to: 'sessions#welcome'
-  get 'authorized', to: 'sessions#page_requires_login'
-  delete 'logout' => 'sessions#destroy'
+ 
 
-  root to: "application#welcome"
+  # root to: "application#welcome"
 
-  get 'auth/github', as: 'github_auth'
-
-  get "/auth/:provider/callback" => "sessions#create_github"
+ 
+  # match "/auth/:provider/callback" => "sessions#create_github", :via => [:get, :post]
   resources :sessions
 
 
