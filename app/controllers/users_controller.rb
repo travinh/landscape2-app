@@ -8,13 +8,18 @@ class UsersController < ApplicationController
 
  
   def create
+    
    
     @user = User.new(user_params)
+    
     if @user.save
+        flash[:notice] = "Created successfully!"
         session[:user_id] = @user.id
         redirect_to '/welcome'
     else
-        redirect_to '/login'
+        flash[:error] = @user.errors.full_messages
+        redirect_to users_new_path
+        # render "new"
     end
  end
 

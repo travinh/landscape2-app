@@ -2,8 +2,8 @@
 <% if logged_in? %>
     
     <h1>Welcome <%= current_user.name %></h1>
-    <h1>You are Logged In</h1>
+    
     <%= button_to "Profile", user_path(current_user.id), method: :get %>
 <% else %>
-    <h1>Welcome</h1>
+    <h1>Welcome to V Landscape</h1>
 <%end%>

@@ -12,9 +12,11 @@
     <% end %>
 <% else %>
     <% @landscapes.each do |land|  %>
-       
+
         <li><%= link_to land.address, landscape_path(land) %></li>
     <% end %>
 <% end %>
 <ul>
+
+
 
