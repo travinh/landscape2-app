@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
 
     def show 
         
-        @team = Team.find_by(id:params[:id])
+        @team = find_team_byID
 
         if @team
             render "show"
@@ -37,7 +37,7 @@ class TeamsController < ApplicationController
 
     def edit
         if check_user_using_teamID
-            @team = Team.find_by(id:params[:id])
+            @team = find_team_byID
             if @team
                 render 'edit'
             else
@@ -49,7 +49,7 @@ class TeamsController < ApplicationController
     end
 
     def update
-        @team =  Team.find_by(id:params[:id])
+        @team =  find_team_byID
         if @team
             @team.update(team_params)
             if @team.errors.any?
@@ -65,7 +65,7 @@ class TeamsController < ApplicationController
 
     def destroy
         if check_user_using_teamID
-            @team = Team.find_by(id:params[:id])
+            @team = find_team_byID
             @team.landscapes.each do |l|
                 l.team_id = nil
             end
@@ -77,6 +77,11 @@ class TeamsController < ApplicationController
     end
 
     private
+
+    def find_team_byID
+        @team2 = Team.find_by(id:params[:id])
+        @team2
+    end
 
 
     def team_params

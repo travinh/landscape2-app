@@ -18,6 +18,7 @@ DONE
 DONE
 
 6. Your authentication system must also allow login from some other service. Facebook, Twitter, Foursquare, Github, etc...
+DONE
 
 7. You must include and make use of a nested resource with the appropriate RESTful URLs.
 

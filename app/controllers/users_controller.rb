@@ -6,13 +6,16 @@ class UsersController < ApplicationController
     
   end
 
+  def new_github
+  end
+
  
   def create
     
-   
     @user = User.new(user_params)
     
     if @user.save
+        
         flash[:notice] = "Created successfully!"
         session[:user_id] = @user.id
         redirect_to '/welcome'
@@ -25,7 +28,7 @@ class UsersController < ApplicationController
 
  def show 
     if check_user_using_userID
-        @user = User.find_by(id:params[:id])
+        @user = find_user_byID
         
         if @user
             render "show"
@@ -40,7 +43,7 @@ end
 
  def edit
     if check_user_using_userID
-        @user = User.find_by(id:params[:id])
+        @user = find_user_byID
         
         if @user
             render 'edit'
@@ -57,7 +60,7 @@ end
 def update
 
     
-    @user =  User.find_by(id:params[:id])
+    @user =  find_user_byID
 
     if @user
         @user.update(user_params)
@@ -74,7 +77,7 @@ end
 
 def destroy
     if check_user_using_userID
-        @user = User.find_by(id:params[:id])
+        @user = find_user_byID
         @user.landscapes.each do |l|
             l.user_id = nil
         end
@@ -87,6 +90,11 @@ end
 
     private
 
+
+    def find_user_byID
+        @user2 = User.find_by(id:params[:id])
+        @user2
+    end
 
 
     def user_params

@@ -13,7 +13,7 @@ class LandscapesController < ApplicationController
 
 
     def show 
-        @landscape = Landscape.find_by_id(params[:id])
+        @landscape = find_landscape_byID
        
         if params[:team_id]
             set_team
@@ -50,7 +50,7 @@ class LandscapesController < ApplicationController
         
         if check_user_using_landscapeID
             
-            @landscape = Landscape.find_by(id:params[:id])
+            @landscape = find_landscape_byID
             if @landscape
                 render 'edit'
             else
@@ -63,7 +63,7 @@ class LandscapesController < ApplicationController
     end
 
     def update
-        @landscape =  Landscape.find_by(id:params[:id])
+        @landscape =  find_landscape_byID
         if @landscape
             @landscape.update(landscape_params)
             if @landscape.errors.any?
@@ -79,7 +79,7 @@ class LandscapesController < ApplicationController
 
     def destroy
         if check_user_using_landscapeID
-            @landscape = Landscape.find_by(id:params[:id])
+            @landscape = find_landscape_byID
             @landscape.destroy
             redirect_to landscapes_path
         else
@@ -113,6 +113,11 @@ class LandscapesController < ApplicationController
 
     def set_team
         @team = Team.find_by_id(params[:team_id])
+    end
+
+    def find_landscape_byID
+        @landscape2 =  Landscape.find_by(id:params[:id])
+        @landscape2
     end
 
     def landscape_params

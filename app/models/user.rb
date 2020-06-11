@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
     def self.find_or_create_by_auth(auth)
   
-        user = User.find_or_create_by(provider: auth['provider'], id: auth['uid'])
+        user = User.find_or_create_by(provider: auth['provider'])
     
        
         user.name = auth['info']['name']

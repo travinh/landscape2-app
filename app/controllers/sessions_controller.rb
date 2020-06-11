@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
     @user = User.find_or_create_by_auth(request.env['omniauth.auth'])
     if @user
-      byebug
+      
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
